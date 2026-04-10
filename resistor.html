@@ -5,6 +5,7 @@
     <title>Resistor | Pembelajaran AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
+
     <script
       type="module"
       src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
@@ -18,18 +19,35 @@
         margin-top: 12px;
       }
 
-      .rotation-controls button {
-        padding: 8px 12px;
+      .rotation-controls button,
+      .button-toggle {
+        padding: 10px 14px;
         border: none;
         border-radius: 8px;
         cursor: pointer;
       }
+
+      .ar-note {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .viewer model-viewer {
+        width: 100%;
+        min-height: 420px;
+        background: #f5f5f5;
+        border-radius: 12px;
+      }
     </style>
   </head>
+
   <body>
+    <!-- NAVBAR -->
     <header>
       <nav class="navbar">
         <div class="logo"><a href="index.html">Home</a></div>
+
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="hamburger">&#9776;</label>
 
@@ -42,37 +60,49 @@
       </nav>
     </header>
 
+    <!-- ISI HALAMAN -->
     <div class="container">
+      <!-- PENJELASAN -->
       <div class="info">
         <div id="penjelasan-resistor"></div>
 
-        <button class="button-toggle" onclick="launchAR()">Aktifkan AR</button>
+        <button class="button-toggle" type="button" onclick="launchAR()">
+          Aktifkan AR
+        </button>
 
         <div class="rotation-controls">
-          <button onclick="rx(15)">X+</button>
-          <button onclick="rx(-15)">X-</button>
-          <button onclick="ry(15)">Y+</button>
-          <button onclick="ry(-15)">Y-</button>
-          <button onclick="rz(15)">Z+</button>
-          <button onclick="rz(-15)">Z-</button>
-          <button onclick="resetRotation()">Reset</button>
+          <button type="button" onclick="rx(15)">X+</button>
+          <button type="button" onclick="rx(-15)">X-</button>
+          <button type="button" onclick="ry(15)">Y+</button>
+          <button type="button" onclick="ry(-15)">Y-</button>
+          <button type="button" onclick="rz(15)">Z+</button>
+          <button type="button" onclick="rz(-15)">Z-</button>
+          <button type="button" onclick="resetRotation()">Reset</button>
+        </div>
+
+        <div class="ar-note">
+          Gunakan tombol X, Y, Z untuk memutar objek. Versi ini memakai WebXR
+          agar rotasi tetap bisa dikontrol saat AR aktif.
         </div>
       </div>
 
+      <!-- MODEL 3D -->
       <div class="viewer">
         <model-viewer
           id="mv"
           src="resistor.glb"
           ar
-          ar-modes="webxr scene-viewer quick-look"
+          ar-modes="webxr"
           camera-controls
           shadow-intensity="1"
           alt="Model 3D Resistor"
-          orientation="0deg 0deg 0deg">
+          orientation="0deg 0deg 0deg"
+        >
         </model-viewer>
       </div>
     </div>
 
+    <!-- SCRIPT -->
     <script src="penjelasankomponen.js"></script>
     <script src="script.js"></script>
 
