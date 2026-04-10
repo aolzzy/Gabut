@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rangkaian Flip-Flop | AR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+  </head>
+  <body>
+    <script src="penjelasankomponen.js"></script>
+
+    <!-- ✅ NAVBAR -->
+    <header>
+      <nav class="navbar">
+        <div class="logo"><a href="index.html"> Home</a></div>
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+        <ul class="menu">
+          <li><a href="resistor.html">Resistor</a></li>
+          <li><a href="kapasitor.html">Kapasitor</a></li>
+          <li><a href="dioda.html">Dioda</a></li>
+          <li><a href="transistor.html">Transistor</a></li>
+          <li><a href="rangkaian.html">Rangkaian</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ✅ KONTEN UTAMA -->
+    <div class="container">
+      <!-- 📘 Penjelasan Rangkaian Flip-Flop -->
+      <div class="info">
+        <div id="penjelasan-flipflop"></div>
+        <button class="button-toggle" onclick="launchAR()">Aktifkan AR</button>
+      </div>
+
+      <!-- 🧱 Model 3D -->
+      <div class="viewer">
+        <model-viewer
+          src="flipflop.glb"
+          <!--
+          Ganti
+          dengan
+          model
+          asli
+          kalau
+          sudah
+          ada
+          --
+        >
+          ar ar-modes="scene-viewer webxr quick-look" camera-controls
+          auto-rotate shadow-intensity="1" alt="Model 3D Rangkaian Flip-Flop">
+        </model-viewer>
+      </div>
+    </div>
+
+    <!-- ✅ SCRIPT -->
+    <script>
+      function launchAR() {
+        const viewer = document.querySelector("model-viewer");
+        viewer.activateAR();
+      }
+    </script>
+    <script src="penjelasankomponen.js"></script>
+    <script>
+      document.getElementById("penjelasan-flipflop").innerHTML =
+        penjelasanKomponen.flipflop;
+
+      function launchAR() {
+        const viewer = document.querySelector("model-viewer");
+        viewer.activateAR();
+      }
+    </script>
+  </body>
+</html>
