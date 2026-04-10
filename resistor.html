@@ -9,17 +9,30 @@
       type="module"
       src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
     ></script>
+
+    <style>
+      .rotation-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .rotation-controls button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    <!-- 🔼 NAVBAR -->
     <header>
       <nav class="navbar">
-        <!-- Home tetap di kiri -->
-        <div class="logo"><a href="index.html"> Home</a></div>
-        <!-- Menu dan Hamburger di kanan -->
+        <div class="logo"><a href="index.html">Home</a></div>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="hamburger">&#9776;</label>
-        <!--Menu list-->
+
         <ul class="menu">
           <li><a href="resistor.html">Resistor</a></li>
           <li><a href="kapasitor.html">Kapasitor</a></li>
@@ -29,59 +42,82 @@
       </nav>
     </header>
 
-    <!-- 🔽 ISI HALAMAN -->
     <div class="container">
-      <!-- 🧠 Penjelasan Resistor -->
       <div class="info">
         <div id="penjelasan-resistor"></div>
+
         <button class="button-toggle" onclick="launchAR()">Aktifkan AR</button>
+
+        <div class="rotation-controls">
+          <button onclick="rx(15)">X+</button>
+          <button onclick="rx(-15)">X-</button>
+          <button onclick="ry(15)">Y+</button>
+          <button onclick="ry(-15)">Y-</button>
+          <button onclick="rz(15)">Z+</button>
+          <button onclick="rz(-15)">Z-</button>
+          <button onclick="resetRotation()">Reset</button>
+        </div>
       </div>
 
-      <!-- 🎯 Model 3D -->
       <div class="viewer">
         <model-viewer
+          id="mv"
           src="resistor.glb"
           ar
           ar-modes="webxr scene-viewer quick-look"
           camera-controls
-          auto-rotate
           shadow-intensity="1"
           alt="Model 3D Resistor"
-        >
-          <!-- (Opsional) Hotspot bisa ditambahkan di sini -->
+          orientation="0deg 0deg 0deg">
         </model-viewer>
       </div>
     </div>
 
-    <!-- 🧩 Panggil Komponen Penjelasan -->
     <script src="penjelasankomponen.js"></script>
     <script src="script.js"></script>
+
     <script>
       document.getElementById("penjelasan-resistor").innerHTML =
         penjelasanKomponen.resistor;
 
+      const mv = document.getElementById("mv");
+
+      let x = 0;
+      let y = 0;
+      let z = 0;
+
+      function applyRotation() {
+        mv.setAttribute("orientation", `${x}deg ${y}deg ${z}deg`);
+
+        if (typeof mv.updateFraming === "function") {
+          mv.updateFraming();
+        }
+      }
+
+      function rx(v) {
+        x += v;
+        applyRotation();
+      }
+
+      function ry(v) {
+        y += v;
+        applyRotation();
+      }
+
+      function rz(v) {
+        z += v;
+        applyRotation();
+      }
+
+      function resetRotation() {
+        x = 0;
+        y = 0;
+        z = 0;
+        applyRotation();
+      }
+
       function launchAR() {
-        const viewer = document.querySelector("model-viewer");
-        viewer.activateAR();
-        <script>
-  const mv = document.getElementById('mv');
-  let x = 0, y = 0, z = 0;
-
-  function applyRotation() {
-    mv.setAttribute('orientation', `${x}deg ${y}deg ${z}deg`);
-  }
-
-  function rx(v){ x += v; applyRotation(); }
-  function ry(v){ y += v; applyRotation(); }
-  function rz(v){ z += v; applyRotation(); }
-</script>
-
-<button onclick="rx(15)">X+</button>
-<button onclick="rx(-15)">X-</button>
-<button onclick="ry(15)">Y+</button>
-<button onclick="ry(-15)">Y-</button>
-<button onclick="rz(15)">Z+</button>
-<button onclick="rz(-15)">Z-</button>
+        mv.activateAR();
       }
     </script>
   </body>
