@@ -63,6 +63,25 @@
       function launchAR() {
         const viewer = document.querySelector("model-viewer");
         viewer.activateAR();
+        <script>
+  const mv = document.getElementById('mv');
+  let x = 0, y = 0, z = 0;
+
+  function applyRotation() {
+    mv.setAttribute('orientation', `${x}deg ${y}deg ${z}deg`);
+  }
+
+  function rx(v){ x += v; applyRotation(); }
+  function ry(v){ y += v; applyRotation(); }
+  function rz(v){ z += v; applyRotation(); }
+</script>
+
+<button onclick="rx(15)">X+</button>
+<button onclick="rx(-15)">X-</button>
+<button onclick="ry(15)">Y+</button>
+<button onclick="ry(-15)">Y-</button>
+<button onclick="rz(15)">Z+</button>
+<button onclick="rz(-15)">Z-</button>
       }
     </script>
   </body>
