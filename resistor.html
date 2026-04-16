@@ -1,27 +1,84 @@
-<model-viewer
-  id="resistorViewer"
-  src="resistor.glb"
-  ar
-  ar-modes="scene-viewer webxr quick-look"
-  camera-controls
-  auto-rotate
-  shadow-intensity="1"
-  alt="Model 3D Resistor">
-</model-viewer>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resistor | Pembelajaran AR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo"><a href="index.html">Home</a></div>
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+        <ul class="menu">
+          <li><a href="resistor.html">Resistor</a></li>
+          <li><a href="kapasitor.html">Kapasitor</a></li>
+          <li><a href="dioda.html">Dioda</a></li>
+          <li><a href="transistor.html">Transistor</a></li>
+          <li><a href="rangkaian.html">Rangkaian</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<div class="anim-controls">
-  <button class="button-toggle" id="btnAnimasiResistor" type="button">
-    Mulai Animasi Resistor
-  </button>
-  <button class="button-toggle secondary" id="btnStopAnimasiResistor" type="button">
-    Stop
-  </button>
-</div>
+    <div class="container">
+      <div class="info">
+        <div id="penjelasan-resistor"></div>
 
-<div class="arus-bar">
-  <div class="arus-flow" id="arusFlow"></div>
-</div>
+        <button class="button-toggle" onclick="launchAR()">Aktifkan AR</button>
 
-<p class="status-animasi" id="statusResistor">Status: standby</p>
+        <div class="anim-controls">
+          <button class="button-toggle" id="btnAnimasiResistor" type="button">
+            Mulai Animasi Resistor
+          </button>
+          <button
+            class="button-toggle secondary"
+            id="btnStopAnimasiResistor"
+            type="button"
+          >
+            Stop
+          </button>
+        </div>
 
-<script src="animasi-resistor.js"></script>
+        <div class="arus-bar">
+          <div class="arus-flow" id="arusFlow"></div>
+        </div>
+
+        <p class="status-animasi" id="statusResistor">Status: standby</p>
+      </div>
+
+      <div class="viewer">
+        <model-viewer
+          id="resistorViewer"
+          src="resistor.glb"
+          ar
+          ar-modes="scene-viewer webxr quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          alt="Model 3D Resistor"
+        >
+        </model-viewer>
+      </div>
+    </div>
+
+    <script src="penjelasankomponen.js"></script>
+    <script src="script.js"></script>
+    <script src="animasi-resistor.js"></script>
+
+    <script>
+      document.getElementById("penjelasan-resistor").innerHTML =
+        penjelasanKomponen.resistor;
+
+      function launchAR() {
+        const viewer = document.getElementById("resistorViewer");
+        viewer.activateAR();
+      }
+    </script>
+  </body>
+</html>
