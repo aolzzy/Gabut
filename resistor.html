@@ -1,69 +1,27 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Resistor | Pembelajaran AR</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-    <script
-      type="module"
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
-    ></script>
-  </head>
-  <body>
-    <!-- 🔼 NAVBAR -->
-    <header>
-      <nav class="navbar">
-        <!-- Home tetap di kiri -->
-        <div class="logo"><a href="index.html"> Home</a></div>
-        <!-- Menu dan Hamburger di kanan -->
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="hamburger">&#9776;</label>
-        <!--Menu list-->
-        <ul class="menu">
-          <li><a href="resistor.html">Resistor</a></li>
-          <li><a href="kapasitor.html">Kapasitor</a></li>
-          <li><a href="dioda.html">Dioda</a></li>
-          <li><a href="transistor.html">Transistor</a></li>
-        </ul>
-      </nav>
-    </header>
+<model-viewer
+  id="resistorViewer"
+  src="resistor.glb"
+  ar
+  ar-modes="scene-viewer webxr quick-look"
+  camera-controls
+  auto-rotate
+  shadow-intensity="1"
+  alt="Model 3D Resistor">
+</model-viewer>
 
-    <!-- 🔽 ISI HALAMAN -->
-    <div class="container">
-      <!-- 🧠 Penjelasan Resistor -->
-      <div class="info">
-        <div id="penjelasan-resistor"></div>
-        <button class="button-toggle" onclick="launchAR()">Aktifkan AR</button>
-      </div>
+<div class="anim-controls">
+  <button class="button-toggle" id="btnAnimasiResistor" type="button">
+    Mulai Animasi Resistor
+  </button>
+  <button class="button-toggle secondary" id="btnStopAnimasiResistor" type="button">
+    Stop
+  </button>
+</div>
 
-      <!-- 🎯 Model 3D -->
-      <div class="viewer">
-        <model-viewer
-          src="resistor.glb"
-          ar
-          ar-modes="webxr scene-viewer quick-look"
-          camera-controls
-          auto-rotate
-          shadow-intensity="1"
-          alt="Model 3D Resistor"
-        >
-          <!-- (Opsional) Hotspot bisa ditambahkan di sini -->
-        </model-viewer>
-      </div>
-    </div>
+<div class="arus-bar">
+  <div class="arus-flow" id="arusFlow"></div>
+</div>
 
-    <!-- 🧩 Panggil Komponen Penjelasan -->
-    <script src="penjelasankomponen.js"></script>
-    <script src="script.js"></script>
-    <script>
-      document.getElementById("penjelasan-resistor").innerHTML =
-        penjelasanKomponen.resistor;
+<p class="status-animasi" id="statusResistor">Status: standby</p>
 
-      function launchAR() {
-        const viewer = document.querySelector("model-viewer");
-        viewer.activateAR();
-      }
-    </script>
-  </body>
-</html>
+<script src="animasi-resistor.js"></script>
